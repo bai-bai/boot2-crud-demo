@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+
+    <h2>学生信息管理系统</h2>
+
+    <p>当前用户：[[${session.user.userName}]]</p>
+
+    <table>
+        <tr>
+            <td>序号</td>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>生日</td>
+            <td>性别</td>
+            <td>简介</td>
+            <td>操作</td>
+        </tr>
+    </table>
+
+</body>
+</html>
