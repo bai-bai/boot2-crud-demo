@@ -24,4 +24,6 @@ public class Student {
 
     private String intr;
 
+    private String headImg;
+
 }

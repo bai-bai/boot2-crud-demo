@@ -1,5 +1,6 @@
 package com.byz.boot2cruddemo.controller;
 
+import com.byz.boot2cruddemo.bean.Student;
 import com.byz.boot2cruddemo.bean.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -36,8 +40,10 @@ public class StudentController {
     }
 
     @GetMapping("/index")
-    public String indexPage(){
+    public String indexPage(Model model){
 
+        List<Student> students = Arrays.asList(new Student(1,"admin",20,new Date(),1,"我是管理员","static/images/h2.png"));
+        model.addAttribute("students",students);
 
         return "index";
     }
