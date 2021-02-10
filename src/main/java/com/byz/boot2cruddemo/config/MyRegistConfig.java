@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.logging.Filter;
 
 //proxyBeanMethods默认为true，此处如果为false，则项目中可能会出现一些冗余的对象，为true则能保证该配置类依赖的组件是单实例的
-@Configuration(proxyBeanMethods = true)
+@Configuration//(proxyBeanMethods = true)
 public class MyRegistConfig {
 
     @Bean

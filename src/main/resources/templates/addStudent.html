@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    *{
+        margin:0px;
+        padding:0px;
+    }
+    table{
+        margin:200px auto;
+        text-align:center;
+    }
+    tr:nth-of-type(even){
+        background:rgba(0,0,0,0.1);
+    }
+    tr,input:not(.button){
+        height:40px;
+    }
+    input{
+        width: 100%;
+    }
+</style>
+<body>
+
+<form  th:action="@{/addStudent}" class="myForm" method="post" enctype="multipart/form-data">
+    <table border="1px" cellspacing="2px" cellpadding="0px">
+        <tr>
+            <th colspan="2">添加学生</th>
+        </tr>
+        <tr>
+            <td>姓名：</td>
+            <td><input type="text" name="name" /></td>
+        </tr>
+        <tr>
+            <td>年龄：</td>
+            <td><input type="number" name="age" /></td>
+        </tr>
+        <tr>
+            <td>生日：</td>
+            <td><input type="date" name="birth" /></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td><input type="text" name="sex" class="bookPage" /></td>
+        </tr>
+        <tr>
+            <td>简介：</td>
+            <td><input type="text" name="intr" /></td>
+        </tr>
+        <tr>
+            <td>头像：</td>
+            <td><input type="file" name="headImg" /></td>
+        </tr>
+        <tr>
+            <td>生活照：</td>
+            <td><input type="file" name="photos" multiple /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="提交" class="button" /><input type="reset" value="重置" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $(function(){
+
+        function checkInfo(){
+            var flag = true;
+            $.each($("input"),function(i,e){
+                if($(e).val() == ""){
+                    flag = false;
+                }
+            });
+            if(!flag){
+                alert("请填写完整信息！");
+                return false;
+            }
+            var $bookPage = $(".bookPage");
+            if($bookPage.val().indexOf(".") != -1){
+                alert("页数必须是整数！");
+                $bookPage.focus();
+                return false;
+            }
+            return true;
+        }
+
+        $(".myForm").submit(function(){
+            if(!checkInfo()){
+                return false;
+            }else{
+                $(this).submit();
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

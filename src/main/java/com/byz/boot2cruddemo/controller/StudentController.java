@@ -42,18 +42,31 @@ public class StudentController {
     @GetMapping("/index")
     public String indexPage(Model model){
 
-        List<Student> students = Arrays.asList(new Student(1,"admin",20,new Date(),1,"我是管理员","static/images/h2.png"));
+        List<Student> students = Arrays.asList(new Student(1,"admin",20,new Date(),1,"我是管理员","static/images/h2.png","static/images/h3.png,static/images/h4.png,static/images/h5.png"));
         model.addAttribute("students",students);
 
         return "index";
     }
 
+    @GetMapping("/addStudentPage")
+    public String addStudentPage(){
 
-    @GetMapping("/error")
-    public String errorPage(){
-        int i = 5 / 0;
-        return "index";
+        return "addStudent";
     }
+
+    @GetMapping("/addStudent")
+    public String addStudent(){
+
+        return "redirect:/index";
+    }
+
+
+
+//    @GetMapping("/error")
+//    public String errorPage(){
+//        int i = 5 / 0;
+//        return "index";
+//    }
 
 
 

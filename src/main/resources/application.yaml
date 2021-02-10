@@ -5,6 +5,27 @@ spring:
     url: jdbc:mysql://localhost:3306/boot2cruddemo?autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
     username: root
     password: root
+    druid:
+      aop-patterns: com.byz.boot2cruddemo.*  #监控SpringBean
+      filters: stat,wall     # 底层开启功能，stat（sql监控），wall（防火墙）
+      stat-view-servlet:   # 配置监控页功能
+        enabled: true
+        login-username: admin
+        login-password: admin
+        resetEnable: false
+      web-stat-filter:  # 监控web
+        enabled: true
+        urlPattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      filter:
+        stat:    # 对上面filters里面的stat的详细配置
+          slow-sql-millis: 1000
+          logSlowSql: true
+          enabled: true
+        wall:
+          enabled: true
+          config:
+            drop-table-allow: false
 
   #静态资源访问路径
   mvc:
@@ -12,4 +33,17 @@ spring:
   web:
     resources:
       static-locations: classpath:/static
+
+#mybatis-plus
+mybatis-plus:
+#  config-location: mapper/*.xml  #指定mapper.xml的位置 默认是classpath*:/mapper/**/*.xml
+# 可以不写全局；配置文件，所有全局配置文件的配置都放在configuration配置项中即可
+#  mapper-locations: classpath:mybatis/mybatis-config.xml
+  configuration:
+    map-underscore-to-camel-case: false #驼峰模式和下划线模式的转换
+
+
+
+
+
 
