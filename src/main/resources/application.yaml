@@ -34,15 +34,21 @@ spring:
     resources:
       static-locations: classpath:/static
 
-#mybatis-plus
-mybatis-plus:
-#  config-location: mapper/*.xml  #指定mapper.xml的位置 默认是classpath*:/mapper/**/*.xml
-# 可以不写全局；配置文件，所有全局配置文件的配置都放在configuration配置项中即可
-#  mapper-locations: classpath:mybatis/mybatis-config.xml
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #sql映射文件位置
   configuration:
-    map-underscore-to-camel-case: false #驼峰模式和下划线模式的转换
+    map-underscore-to-camel-case: true
 
+#mybatis-plus:
+#  mapper-locations: classpath:mapper/*.xml
+#  configuration:
+#    #mybatis plus关闭驼峰自动转下划线
+#    map-underscore-to-camel-case: false
 
+#分页插件配置
+pagehelper:
+  auto-dialect: true
+  reasonable: true
 
 
 

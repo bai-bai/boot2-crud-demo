@@ -49,9 +49,9 @@
             <td>生活照</td>
             <td>操作</td>
         </tr>
-        <div th:if="${students != null and students.size() > 0}">
-            <tr th:each="student,status:${students}">
-                <td>[[${status.count }]]</td>
+        <div th:if="${page != null and page.size > 0}">
+            <tr th:each="student,status:${page.list}">
+                <td>[[${student.id }]]</td>
                 <td>[[${student.name }]]</td>
                 <td>[[${student.age }]]</td>
                 <td>[[${#dates.format(student.birth,"yyyy-MM-dd HH:mm:ss")}]]</td>
@@ -64,41 +64,58 @@
                     <img th:src="${student.photos.split(',')[0]}" alt="">
                 </td>
                 <td>
-                    <input type="button" value="修改"> |
-                    <input type="button" value="删除">
+                    <a th:href="@{/updStudentPage(id=${student.id})}">修改</a> |
+<!--                    <input type="button" value="修改" th:studentId="${student.id}" th:onclick="updById(this);"> |-->
+                    <input type="button" th:studentId="${student.id}" th:onclick="delById(this);" value="删除">
                 </td>
             </tr>
         </div>
-        <div th:unless="${students != null and students.size() > 0}">
+        <div th:unless="${page != null and page.size > 0}">
             <tr>
-                <td colspan="5">没有查询到数据！</td>
+                <td colspan="9">没有查询到数据！</td>
             </tr>
         </div>
 
-<!--        <tr>-->
-<!--            <td colspan="5">-->
-<!--                <a href="${ctx }/book/bookList?pageIndex=1&flag=${flag}&condition=${condition}">首页</a>-->
-<!--                <a href="${ctx }/book/bookList?pageIndex=${page.pageIndex-1 }&flag=${flag}&condition=${condition}">上一页</a>-->
-<!--                <a href="${ctx }/book/bookList?pageIndex=${page.pageIndex+1 }&flag=${flag}&condition=${condition}">下一页</a>-->
-<!--                <a href="${ctx }/book/bookList?pageIndex=${page.totalPage }&flag=${flag}&condition=${condition}">末页</a>-->
-<!--                <span>第${page.pageIndex }页/共${page.totalPage }页</span>-->
-<!--            </td>-->
-<!--        </tr>-->
+        <tr>
+            <td colspan="9">
+                <a th:href="@{/index(currentPage=${page.pageNum-1})}">上一页</a>
+                <a th:href="@{/index(currentPage=${num})}" th:each="num:${#numbers.sequence(1,page.pages)}">[[${num}]]</a>
+                <a th:href="@{/index(currentPage=${page.pageNum+1})}">下一页</a>
+                <span>第[[${page.pageNum }]]页/共[[${page.pages }]]页 共[[${page.total}]]条数据</span>
+            </td>
+        </tr>
+
     </table>
 </form>
 
 
 <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
 <script>
+
     $(function(){
-        // if("${flag}" != ""){
-        //     $.each($(".flag option"),function(i,e){
-        //         if("${flag}" == $(e).val()){
-        //             $(this).attr("selected",true);
-        //         }
-        //     });
-        // }
+
+
+
     });
+
+    function delById(obj) {
+        $.ajax({
+            url:"[[@{/delStudent}]]",
+            data:"id="+$(obj).attr("studentId"),
+            type:"get",
+            dataType:"JSON",
+            success:function(data){
+                if(data.result=="删除成功！"){
+                    $(obj).parents("tr").remove();
+                }else{
+                    alert("删除失败");
+                }
+            },
+            error:function(a,b,c){
+                alert(c);
+            }
+        });
+    }
 </script>
 
 </body>

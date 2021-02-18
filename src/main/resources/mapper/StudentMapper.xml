@@ -4,12 +4,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.byz.boot2cruddemo.mapper.StudentMapper">
+    <insert id="addStudent">
+        insert student(`name`,age,birth,sex,intr,headImg,photos) values(#{name},#{age},#{birth},#{sex},#{intr},#{headImg},#{photos})
+    </insert>
 
+    <delete id="delStudentById" parameterType="int">
+        delete from student where id = #{id}
+    </delete>
 
     <select id="getStudentCount" resultType="integer">
-
         select count(*) from student
-
     </select>
+
+    <!--
+        '%#{name}%' sql无法识别写在字符串里的#{}，此时可以使用${}，但是为了防止sql注入
+         这里使用concat连接函数
+     -->
+    <select id="getStudentList" resultType="com.byz.boot2cruddemo.bean.Student">
+        select * from student where 1 = 1
+        <if test="name != null and name != ''">
+            name like concat('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="getStudentById" resultType="com.byz.boot2cruddemo.bean.Student">
+        select * from student
+        where id = #{id}
+    </select>
+
+    <update id="updStudentById">
+        update student set
+        `name` = #{name},
+        age = #{age},
+        birth = #{birth},
+        sex = #{sex},
+        intr = #{intr},
+        headImg = #{headImg},
+        photos = #{photos}
+        where id = #{id}
+    </update>
 
 </mapper>

@@ -1,6 +1,8 @@
 package com.byz.boot2cruddemo;
 
+import com.byz.boot2cruddemo.bean.User;
 import com.byz.boot2cruddemo.mapper.StudentMapper;
+import com.byz.boot2cruddemo.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ class Boo2CrudDemoApplicationTests {
     @Autowired
     StudentMapper studentMapper;
 
+    @Autowired
+    UserMapper userMapper;
+
     @Test
     void contextLoads() {
 //        jdbcTemplate.queryForObject("select * from account_tbl")
@@ -39,4 +44,9 @@ class Boo2CrudDemoApplicationTests {
         log.info("studentCount>>>>>>>>>>" + studentCount);
     }
 
+    @Test
+    void testUserMapper(){
+//        User user = userMapper.selectById(1);
+//        log.info("用户信息：{}",user);
+    }
 }

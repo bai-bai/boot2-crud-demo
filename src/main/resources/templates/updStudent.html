@@ -25,38 +25,39 @@
 </style>
 <body>
 
-<form  th:action="@{/addStudent}" class="myForm" method="post" enctype="multipart/form-data">
+<form  th:action="@{/updStudent}" class="myForm" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${student.id}">
     <table border="1px" cellspacing="2px" cellpadding="0px">
         <tr>
-            <th colspan="2">添加学生</th>
+            <th colspan="2">修改学生</th>
         </tr>
         <tr>
             <td>姓名：</td>
-            <td><input type="text" name="name" /></td>
+            <td><input type="text" name="name" th:value="${student.name}" /></td>
         </tr>
         <tr>
             <td>年龄：</td>
-            <td><input type="number" name="age" /></td>
+            <td><input type="number" name="age"  th:value="${student.age}"/></td>
         </tr>
         <tr>
             <td>生日：</td>
-            <td><input type="date" name="birth" /></td>
+            <td><input type="date" name="birth" th:value="${student.birth}" /></td>
         </tr>
         <tr>
             <td>性别：</td>
-            <td><input type="text" name="sex" class="bookPage" /></td>
+            <td><input type="text" name="sex" class="bookPage" th:value="${student.sex}" /></td>
         </tr>
         <tr>
             <td>简介：</td>
-            <td><input type="text" name="intr" /></td>
+            <td><input type="text" name="intr"  th:value="${student.intr}"/></td>
         </tr>
         <tr>
             <td>头像：</td>
-            <td><input type="file" name="headImgFile" /></td>
+            <td><input type="file" name="headImgFile" th:value="${student.headImg}" /></td>
         </tr>
         <tr>
             <td>生活照：</td>
-            <td><input type="file" name="photosFile" multiple /></td>
+            <td><input type="file" name="photosFile" multiple th:value="${student.photos}" /></td>
         </tr>
         <tr>
             <td colspan="2">
